@@ -12,7 +12,7 @@ void rec(int *array, int back, int end, size_t size)
 {
 	int pvt, i, j, tmp;
 
-	pvt = array[j];
+	pvt = array[end];
 	
 	for (i = back; i < end; i++)
 	{
@@ -36,8 +36,8 @@ void rec(int *array, int back, int end, size_t size)
 
 	if (back < end)
 	{
-		quicksort(array, back, i - 1, size);
-		quicksort(array, i + 1, end, size);
+		rec(array, back, i - 1, size);
+		rec(array, i + 1, end, size);
 	}
 }
 
