@@ -53,8 +53,8 @@ int div(int *array, size_t size, int back, int end)
 
         if (end > back)
         {
-                sort(array, size, back, above - 1);
-                sort(array, size, above + 1, end);
+                div(array, size, back, above - 1);
+                div(array, size, above + 1, end);
         }
 
 }
