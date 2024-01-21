@@ -29,10 +29,11 @@ void rec(int *array, int back, int end, size_t size)
 			array[j] = tmp;
 			i++;
 			j--;
-			print_array(array, size);
 		}
 
 	}while (i <= j);
+	
+	print_array(array, size);
 
 	if (i < end)
 		rec(array, i, end, size);
