@@ -1,7 +1,8 @@
 #include "sort.h"
 
 void swap(int *x, int *y);
-void part(int *array, size_t size, int back, int end);
+int div(int *array, size_t size, int back, int end);
+void sort(int *array, size_t size, int back, int end);
 
 /**
  * swap - swap two integers in array
@@ -18,7 +19,7 @@ void swap(int *x, int *y)
 }
 
 /**
- * part - order a subset.
+ * div - order a subset.
  *
  * @array: The array of integers.
  * @size: The size of the array.
@@ -27,7 +28,7 @@ void swap(int *x, int *y)
  *
  * Return: The final partition index.
  */
-void part(int *array, size_t size, int back, int end)
+int div(int *array, size_t size, int back, int end)
 {
 	int *pvt, above, below;
 
@@ -51,11 +52,28 @@ void part(int *array, size_t size, int back, int end)
 		print_array(array, size);
 	}
 
-        if (end > back)
-        {
-                part(array, size, back, above - 1);
-                part(array, size, above + 1, end);
-        }
+	return (above);
+}
+
+/**
+ * sort - Implement the quicksort algorithm through recursion.
+ * @array: An array of integers to sort.
+ * @size: The size of the array.
+ * @back: The starting index of the array partition to order.
+ * @end: The ending index of the array partition to order.
+ *
+ * Description: uses the Lomuto partition scheme
+ */
+void sort(int *array, size_t size, int back, int end)
+{
+	int a;
+
+	if (end > back)
+	{
+		a = div(array, size, back, end);
+		sort(array, size, back, a - 1);
+		sort(array, size, a + 1, end);
+	}
 }
 
 /**
@@ -71,5 +89,5 @@ void quick_sort(int *array, size_t size)
 	if (array == NULL || size < 2)
 		return;
 
-	part(array, size, 0, size - 1);
+	sort(array, size, 0, size - 1);
 }
