@@ -33,6 +33,10 @@ void rec(int *array, int back, int end, size_t size)
 
 	}while (i <= j);
 	
+    	tmp = array[i];
+    	array[i] = array[end];
+    	array[end] = tmp;
+
 	print_array(array, size);
 
 	if (i < end)
