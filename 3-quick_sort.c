@@ -1,59 +1,93 @@
 #include "sort.h"
 
-void rec(int *array, int back, int end, size_t size);
+void swap(int *x, int *y);
+int div(int *array, size_t size, int back, int end);
+void sort(int *array, size_t size, int back, int end);
+
 /**
- * rec - recursion for quick sort
- * @back: first index of array
- * @end: last index of array
- *
- * Return: void
+ * swap_ints - swap two integers in array
+ * @x: first integer to swap
+ * @y: second integer to swap
  */
-void rec(int *array, int back, int end, size_t size)
+void swap(int *x, int *y)
 {
-	int pvt, i, j, tmp;
+	int tmp;
 
-	pvt = array[end];
-	j = back;
+	tmp = *x;
+	*x = *y;
+	*y = tmp;
+}
 
-	for (i = back; i < end; i++)
+/**
+ * div - .
+ *
+ * @array: The array of integers.
+ * @size: The size of the array.
+ * @back: The starting index of the subset to order.
+ * @end: The ending index of the subset to order.
+ *
+ * Return: The final partition index.
+ */
+int div(int *array, size_t size, int back, int end)
+{
+	int *pvt, above, below;
+
+	pvt = array + end;
+	for (above = below = back; below < end; below++)
 	{
-		if (array[i] < pvt)
+		if (array[below] < *pvt)
 		{
-			tmp = array[j];
-			array[j] = array[i];
-			array[i] = tmp;
-			if (array[i] != array[j])
+			if (above < below)
+			{
+				swap_ints(array + below, array + above);
 				print_array(array, size);
-			j++;
+			}
+			above++;
 		}
 	}
 
-	tmp = array[j];
-	array[j] = array[end];
-	array[end] = tmp;
-
-	if (array[end] != array[i])
-		print_array(array, size);
-
-	if (back < end)
+	if (array[above] > *pvt)
 	{
-		rec(array, back, j - 1, size);
-		rec(array, j + 1, end, size);
+		swap_ints(array + above, pvt);
+		print_array(array, size);
+	}
+
+	return (above);
+}
+
+/**
+ * sort - Implement the quicksort algorithm through recursion.
+ * @array: An array of integers to sort.
+ * @size: The size of the array.
+ * @back: The starting index of the array partition to order.
+ * @end: The ending index of the array partition to order.
+ *
+ * Description: uses the Lomuto partition scheme
+ */
+void sort(int *array, size_t size, int back, int end)
+{
+	int a;
+
+	if (end - back > 0)
+	{
+		a = div(array, size, back, end);
+		sort(array, size, back, a - 1);
+		sort(array, size, a + 1, end);
 	}
 }
 
 /**
- * quick_sort - sorts an array of integers in ascending
- *              order using the Quick sort algorithm
- * @array: integers
- * @size: size of array
+ * quick_sort - Sort an array of integers in ascending
+ *              order using the quicksort algorithm
+ * @array: array of integers
+ * @size: size of the array
  *
- * Return: void
+ * Description: prints the array after each swap of two elements
  */
 void quick_sort(int *array, size_t size)
 {
-	if (!array || size < 2)
+	if (array == NULL || size < 2)
 		return;
 
-	rec(array, 0, (int)size - 1, size);
+	lomuto_sort(array, size, 0, size - 1);
 }
