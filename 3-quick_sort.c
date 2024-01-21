@@ -1,7 +1,7 @@
 #include "sort.h"
 
 void swap(int *x, int *y);
-int div(int *array, size_t size, int back, int end);
+int part(int *array, size_t size, int back, int end);
 
 /**
  * swap - swap two integers in array
@@ -18,7 +18,7 @@ void swap(int *x, int *y)
 }
 
 /**
- * div - order a subset.
+ * part - order a subset.
  *
  * @array: The array of integers.
  * @size: The size of the array.
@@ -27,7 +27,7 @@ void swap(int *x, int *y)
  *
  * Return: The final partition index.
  */
-void div(int *array, size_t size, int back, int end)
+void part(int *array, size_t size, int back, int end)
 {
 	int *pvt, above, below;
 
@@ -47,14 +47,14 @@ void div(int *array, size_t size, int back, int end)
 
 	if (array[above] > *pvt)
 	{
-		swap(array + above, pvt);
+		part(array + above, pvt);
 		print_array(array, size);
 	}
 
         if (end > back)
         {
-                div(array, size, back, above - 1);
-                div(array, size, above + 1, end);
+                part(array, size, back, above - 1);
+                part(array, size, above + 1, end);
         }
 }
 
@@ -71,5 +71,5 @@ void quick_sort(int *array, size_t size)
 	if (array == NULL || size < 2)
 		return;
 
-	div(array, size, 0, size - 1);
+	part(array, size, 0, size - 1);
 }
