@@ -27,7 +27,7 @@ void swap(int *x, int *y)
  *
  * Return: The final partition index.
  */
-int div(int *array, size_t size, int back, int end)
+void div(int *array, size_t size, int back, int end)
 {
 	int *pvt, above, below;
 
@@ -56,7 +56,6 @@ int div(int *array, size_t size, int back, int end)
                 div(array, size, back, above - 1);
                 div(array, size, above + 1, end);
         }
-
 }
 
 /**
