@@ -11,39 +11,34 @@ void rec(int *array, int back, int end, size_t size);
 void rec(int *array, int back, int end, size_t size)
 {
 	int pvt, i, j, tmp;
-	i = back;
-	j = end;
+
 	pvt = array[j];
 	
-	do
+	for (i = back; i < end; i++)
 	{
-		while (array[i] < pvt)
-			i++;
-		while (array[j] > pvt)
-			j--;
-
-		if (i < j)
+		if (array[i] < pvt)
 		{
 			tmp = array[i];
 			array[i] = array[j];
 			array[j] = tmp;
-			i++;
-			j--;
+			if (array[i] != array[j])
+				print_array(array, size);
+			j++;
 		}
+	}
 
-	}while (i < j);
-	
-    	tmp = array[i];
-    	array[i] = array[end];
-    	array[end] = tmp;
+	tmp = array[i];
+	array[i] = array[end];
+	array[end] = tmp;
 
-	print_array(array, size);
+	if (array[end] != array[i])
+		print_array(array, size);
 
-	if (i + 1 < end)
-		rec(array, i + 1, end, size);
-
-	if(back < j)
-		rec(array, back , j, size);
+	if (back < end)
+	{
+		quicksort(array, back, i - 1, size);
+		quicksort(array, i + 1, end, size);
+	}
 }
 
 /**
