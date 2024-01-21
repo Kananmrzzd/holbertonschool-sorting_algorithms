@@ -19,7 +19,7 @@ void swap(int *x, int *y)
 }
 
 /**
- * div - .
+ * div - order a subset.
  *
  * @array: The array of integers.
  * @size: The size of the array.
@@ -39,7 +39,7 @@ int div(int *array, size_t size, int back, int end)
 		{
 			if (above < below)
 			{
-				swap_ints(array + below, array + above);
+				swap(array + below, array + above);
 				print_array(array, size);
 			}
 			above++;
@@ -48,7 +48,7 @@ int div(int *array, size_t size, int back, int end)
 
 	if (array[above] > *pvt)
 	{
-		swap_ints(array + above, pvt);
+		swap(array + above, pvt);
 		print_array(array, size);
 	}
 
@@ -89,5 +89,5 @@ void quick_sort(int *array, size_t size)
 	if (array == NULL || size < 2)
 		return;
 
-	lomuto_sort(array, size, 0, size - 1);
+	sort(array, size, 0, size - 1);
 }
