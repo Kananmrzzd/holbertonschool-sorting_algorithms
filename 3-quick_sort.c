@@ -68,7 +68,7 @@ void sort(int *array, size_t size, int back, int end)
 {
 	int a;
 
-	if (end - back > 0)
+	if (end > back)
 	{
 		a = div(array, size, back, end);
 		sort(array, size, back, a - 1);
