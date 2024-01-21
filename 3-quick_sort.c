@@ -22,7 +22,7 @@ void rec(int *array, int back, int end, size_t size)
 		while (array[j] > pvt)
 			j--;
 
-		if (i <= j)
+		if (i < j)
 		{
 			tmp = array[i];
 			array[i] = array[j];
@@ -31,7 +31,7 @@ void rec(int *array, int back, int end, size_t size)
 			j--;
 		}
 
-	}while (i <= j);
+	}while (i < j);
 	
     	tmp = array[i];
     	array[i] = array[end];
@@ -39,8 +39,8 @@ void rec(int *array, int back, int end, size_t size)
 
 	print_array(array, size);
 
-	if (i < end)
-		rec(array, i, end, size);
+	if (i + 1 < end)
+		rec(array, i + 1, end, size);
 
 	if(back < j)
 		rec(array, back , j, size);
