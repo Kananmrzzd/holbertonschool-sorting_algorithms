@@ -5,7 +5,7 @@ int div(int *array, size_t size, int back, int end);
 void sort(int *array, size_t size, int back, int end);
 
 /**
- * swap_ints - swap two integers in array
+ * swap - swap two integers in array
  * @x: first integer to swap
  * @y: second integer to swap
  */
