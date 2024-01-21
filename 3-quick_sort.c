@@ -1,7 +1,7 @@
 #include "sort.h"
 
 void swap(int *x, int *y);
-int part(int *array, size_t size, int back, int end);
+void part(int *array, size_t size, int back, int end);
 
 /**
  * swap - swap two integers in array
@@ -47,7 +47,7 @@ void part(int *array, size_t size, int back, int end)
 
 	if (array[above] > *pvt)
 	{
-		part(array + above, pvt);
+		swap(array + above, pvt);
 		print_array(array, size);
 	}
 
